@@ -30,19 +30,27 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void createUser(User user) {
+    public void createUser(String firstName, String lastName,
+                           String email, Integer age) {
+        userRepository.save(new User(firstName, lastName, email, age));
+    }
+
+    @Transactional
+    @Override
+    public void updateUser(Integer id, String firstName, String lastName,
+                           String email, Integer age) {
+        User user = getUser(id);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setAge(age);
         userRepository.save(user);
     }
 
     @Transactional
     @Override
-    public void updateUser(User user) {
-        userRepository.save(user);
-    }
-
-    @Transactional
-    @Override
-    public void deleteUser(User user) {
+    public void deleteUser(Integer id) {
+        User user = getUser(id);
         userRepository.delete(user);
     }
 }

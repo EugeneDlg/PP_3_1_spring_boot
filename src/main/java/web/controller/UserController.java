@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
 import web.service.UserService;
 
-import java.util.List;
-
 
 @Controller
 public class UserController {
@@ -25,7 +23,7 @@ public class UserController {
                              @RequestParam(value = "email") String email,
                              @RequestParam(value = "age") Integer age,
                              ModelMap model) {
-        userService.createUser(new User(firstName, lastName, email, age));
+        userService.createUser(firstName, lastName, email, age);
         model.addAttribute("firstname", firstName);
         model.addAttribute("lastname", lastName);
         return "usercreated";
@@ -43,8 +41,7 @@ public class UserController {
 
     @GetMapping(value = "/getall")
     public String getUsers(ModelMap model) {
-        List<User> users = userService.getUsers();
-        model.addAttribute("users", users);
+        model.addAttribute("users", userService.getUsers());
         return "allusersinfo";
     }
 
@@ -63,11 +60,7 @@ public class UserController {
         if (user == null) {
             return "notfound";
         }
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setAge(age);
-        userService.updateUser(user);
+        userService.updateUser(id, firstName, lastName, email, age);
         return "userupdated";
     }
 
@@ -77,7 +70,7 @@ public class UserController {
         if (user == null) {
             return "notfound";
         }
-        userService.deleteUser(user);
+        userService.deleteUser(id);
         return "userdeleted";
     }
 }

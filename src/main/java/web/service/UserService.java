@@ -1,17 +1,17 @@
 package web.service;
 
-import java.util.List;
-
 import web.model.User;
+
+import java.util.List;
 
 public interface UserService {
     public User getUser(Integer id);
 
     public List<User> getUsers();
 
-    public void createUser(User user);
+    public void createUser(String firstName, String lastName, String email, Integer age);
 
-    public void updateUser(User user);
+    public void updateUser(Integer id, String firstName, String lastName, String email, Integer age);
 
-    public void deleteUser(User user);
+    public void deleteUser(Integer id);
 }
