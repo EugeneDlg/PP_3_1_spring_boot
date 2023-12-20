@@ -4,13 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>User created</title>
+    <style>
+        .home {
+            font-size: 1.25rem;
+        }
+    </style>
 </head>
 <body>
     <h2>User created!</h2>
-    <th:block>
-        <h4 th:text="${firstname}"></h4>
-        <br>
-        <h4 th:text="${lastname}"></h4>
-    </th:block>
+    <br>
+       First name: <h4 th:text="${firstname}"></h4>
+       Last name: <h4 th:text="${lastname}"></h4>
+
+
+<br>
+    <a class="home" th:href="@{/getall}">Home</a>
 </body>
 </html>

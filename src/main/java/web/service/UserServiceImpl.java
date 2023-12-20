@@ -7,6 +7,8 @@ import web.repository.UserRepository;
 
 import java.util.List;
 
+import static java.lang.Integer.max;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,6 +34,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(String firstName, String lastName,
                            String email, Integer age) {
+        firstName = firstName.strip();
+        lastName = lastName.strip();
+        email = email.strip();
+        age = max(0, age);
         userRepository.save(new User(firstName, lastName, email, age));
     }
 
@@ -39,6 +45,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(Integer id, String firstName, String lastName,
                            String email, Integer age) {
+        firstName = firstName.strip();
+        lastName = lastName.strip();
+        email = email.strip();
+        age = max(0, age);
         User user = getUser(id);
         user.setFirstName(firstName);
         user.setLastName(lastName);

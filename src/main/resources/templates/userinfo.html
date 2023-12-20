@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>User details</title>
+    <style>
+        .home {
+            font-size: 1.25rem;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -25,5 +30,57 @@
         </tr>
     </table>
 </div>
+<br>
+<br>
+<hr>
+<table>
+    <p><b>Update user data:</b></p>
+    <form th:method="POST" th:action="@{/update(id=${user.id})}" th:object="${user}">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <tr>
+            <td>
+                <label for="firstName">Enter first name:</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{firstName}" id="firstName">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="lastName">Enter last name:</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{lastName}" id="lastName" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">Enter email:</label>
+            </td>
+            <td>
+                <input type="email" th:field="*{email}" id="email" required />
+            </td>
+        <tr>
+            <td>
+                <label for="age">Enter age:</label>
+            </td>
+            <td>
+                <input type="number" min="0" max="120" th:field="*{age}" id="age" required />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" style="height:2rem; width:4rem; font-size: medium" >Update</button>
+            </td>
+        </tr>
+    </form>
+</table>
+<br>
+<form th:method="POST" th:action="@{/delete(id=${user.id})}">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    Do you want to delete user?  <button type="submit" style="height:2rem; width:8rem; font-size: medium" >Delete</button>
+</form>
+<br>
+<a class="home" th:href="@{/getall}">Home</a>
 </body>
 </html>
